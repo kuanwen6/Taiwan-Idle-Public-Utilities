@@ -29,10 +29,27 @@
 
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
+        <div class="tab">
+                <button class="tablinks active" onclick="openTab(event, 'search')">進階搜索</button>
+                <button class="tablinks" onclick="openTab(event, 'plot')">圖表</button>
+                <button class="tablinks" onclick="openTab(event, 'info')">詳細資料</button>
+              </div>
+              
+              <!-- Tab content -->
+              <div id="search" class="tabcontent" style="display:block;">
+                <h3>London</h3>
+                <p>London is the capital city of England.</p>
+              </div>
+              
+              <div id="plot" class="tabcontent">
+                <h3>Paris</h3>
+                <p>Paris is the capital of France.</p> 
+              </div>
+              
+              <div id="info" class="tabcontent">
+                <h3>Tokyo</h3>
+                <p>Tokyo is the capital of Japan.</p>
+              </div>
     </div>
 
     <div id="main">
