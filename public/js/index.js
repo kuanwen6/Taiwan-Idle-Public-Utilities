@@ -47,20 +47,12 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 L.easyButton({
     states: [{
         stateName: 'open-nav',
-        icon: 'fa-map-marker',
+        icon: 'fa-angle-double-right',
         title: '展開側欄',
         onClick: function(control) {
           openNav();
           control.state('close-nav');
         }
-      }, {
-        icon: 'fa-undo',
-        stateName: 'close-nav',
-        onClick: function(control) {
-          closeNav();
-          control.state('open-nav');
-        },
-        title: '縮小側欄'
       }]
 }).addTo(mymap);
 
@@ -68,6 +60,7 @@ var dataColumn =  ["name","address","supervisor","manager","date","cost","type"]
 
 $('.menu .item').tab();
 $('.ui.dropdown').dropdown('set selected', "0");
+$('.tab[data-tab="info"] .sub.header').hide();
 
 $.getJSON("/data.json", function(data) {
     data.forEach((place, index) => {
@@ -79,6 +72,8 @@ $.getJSON("/data.json", function(data) {
             $('.ui.menu > .item[data-tab="info"]').addClass('active');
             $('.ui.tab').removeClass('active');
             $('.ui.tab[data-tab="info"]').addClass('active');
+
+            $('.tab[data-tab="info"] .sub.header').show();
 
             dataColumn.forEach(function(col){
                 console.log(col);

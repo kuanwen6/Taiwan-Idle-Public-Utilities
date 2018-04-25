@@ -58,13 +58,23 @@
     padding: 12px;
 }
 
-.header p{
+.tab[data-tab="info"]  .header p{
     font-size: 16px;
     font-weight: initial;
 }
 
-.sub.header {
-    font-size: 1rem;
-    margin-bottom: 3px;
-    margin-bottom: 2rem;
+.tab[data-tab="info"] .sub.header {
+    /*display: none !important;*/
+    font-size: 1rem !important;
+    margin-bottom: 5px !important;
+    margin-top: 2rem !important;
+}
+
+.search-content {
+    padding: 15px;
+}
+
+.fa-angle-double-right{
+    font-weight: bold !important;
+    font-size: 1.2rem !important;
 }

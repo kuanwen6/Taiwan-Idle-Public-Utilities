@@ -8,14 +8,13 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-3.2.0.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
-    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-    crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
-    integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
-    crossorigin=""></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+        crossorigin=""></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
-<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
 
     <title>台灣蚊子館地圖</title>
 
@@ -23,75 +22,91 @@
 
 <body>
     <div class="container">
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div class="ui pointing secondary menu">
-          <a class="item active" data-tab="search">進階搜索</a>
-          <a class="item" data-tab="plot">圖表呈現</a>
-          <a class="item" data-tab="info">詳細資料</a>
-        </div>
-        <div class="ui tab active" data-tab="search">
-          <div>
-            <button class="ui circular facebook icon button">
-                <i class="facebook icon"></i>
-              </button>
-              <button class="ui circular twitter icon button">
-                <i class="twitter icon"></i>
-              </button>
-              <button class="ui circular linkedin icon button">
-                <i class="linkedin icon"></i>
-              </button>
-              <button class="ui circular google plus icon button">
-                <i class="google plus icon"></i>
-              </button>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="ui pointing secondary menu">
+                <a class="item active" data-tab="search">進階搜索</a>
+                <a class="item" data-tab="plot">圖表呈現</a>
+                <a class="item" data-tab="info">詳細資料</a>
             </div>
-            <br>
-          <span>
-            選擇區域：
-          <div class="ui selection dropdown">
-            <input type="hidden" name="gender">
-            <i class="dropdown icon"></i>
-            <div class="default text">請選擇區域</div>
-            <div class="menu">
-              <div class="item" data-value="0">全部區域</div>
-              <div class="item" data-value="1">北部</div>
-              <div class="item" data-value="2">中部</div>
-              <div class="item" data-value="3">東部</div>
-              <div class="item" data-value="4">西部</div>
-              <div class="item" data-value="5">南部</div>
+            <div class="ui tab active" data-tab="search">
+                <div>
+                    <h3 class="ui header">
+                        <img class="ui image" src="img/test.svg">
+                        <div class="content">
+                            選擇顯示類別
+                            <div class="sub header">點擊後可以選擇是否在地圖上顯示該類別</div>
+                        </div>
+                    </h3>
+                    <div class="search-content">
+                        <button class="ui circular facebook icon button">
+                            <i class="facebook icon"></i>
+                        </button>
+                        <button class="ui circular twitter icon button">
+                            <i class="twitter icon"></i>
+                        </button>
+                        <button class="ui circular linkedin icon button">
+                            <i class="linkedin icon"></i>
+                        </button>
+                        <button class="ui circular google plus icon button">
+                            <i class="google plus icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <br>
+                <h3 class="ui header">
+                    <img class="ui image" src="img/signpost.svg">
+                    <div class="content">
+                        選擇顯示地區
+                        <div class="sub header">顯示所選區域之閒置公共設施</div>
+                    </div>
+                </h3>
+                <div class="search-content">
+                    <span>
+                        選擇區域：
+                        <div class="ui selection dropdown">
+                            <input type="hidden" name="gender">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">請選擇區域</div>
+                            <div class="menu">
+                                <div class="item" data-value="0">全部區域</div>
+                                <div class="item" data-value="1">北部</div>
+                                <div class="item" data-value="2">中部</div>
+                                <div class="item" data-value="3">東部</div>
+                                <div class="item" data-value="4">西部</div>
+                                <div class="item" data-value="5">南部</div>
+                            </div>
+                        </div>
+                    </span>
+                </div>
             </div>
-          </div>
-        </span>
-        </div>
-        <div class="ui tab" data-tab="plot">
-          
-        </div>
-        <div class="ui tab" data-tab="info">
-          <h2 class="ui header">
-            <span id="info-name">尚未選取地點</span>
-            <br>
-            <div class="sub header" style="margin-top: 18px;">設施地址</div>
-            <p id="info-address"></p>
+            <div class="ui tab" data-tab="plot">
 
-            <div class="sub header">主管機關</div>
-            <p id="info-supervisor"></p>
-            <div class="sub header">管理機關</div>
-            <p id="info-manager"></p>
-            <div class="sub header">製造日期</div>
-            <p id="info-date"></p>
-            <div class="sub header">建造經費</div>
-            <p id="info-cost"></p>
-            <div class="sub header">類別</div>
-            <p id="info-type"></p>
-          </h2>
+            </div>
+            <div class="ui tab" data-tab="info">
+                <h2 class="ui header">
+                    <span id="info-name">尚未選取地點</span>
+                    <br>
+                    <div class="sub header" style="margin-top: 18px;">設施地址</div>
+                    <p id="info-address"></p>
 
-          
-          
+                    <div class="sub header">主管機關</div>
+                    <p id="info-supervisor"></p>
+                    <div class="sub header">管理機關</div>
+                    <p id="info-manager"></p>
+                    <div class="sub header">製造日期</div>
+                    <p id="info-date"></p>
+                    <div class="sub header">建造經費</div>
+                    <p id="info-cost"></p>
+                    <div class="sub header">類別</div>
+                    <p id="info-type"></p>
+                </h2>
+            </div>
         </div>
+
+        <div id="main"></div>
     </div>
-
-    <div id="main"></div>
-  </div>
 </body>
-        <script src="public/js/index.js"></script>
+<script src="public/js/index.js"></script>
+
 </html>
