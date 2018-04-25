@@ -1,7 +1,7 @@
 function openNav() {
     document.getElementById("mySidenav").style.width = "380px";
     document.getElementById("mySidenav").style.boxShadow="4px 4px 12px 4px rgba(20%,20%,40%,0.5)";
-    document.getElementById("main").style.marginLeft = "380px";
+    document.getElementById("main").style.marginLeft = "190px";
 }
 
 function closeNav() {
@@ -9,6 +9,30 @@ function closeNav() {
     document.getElementById("mySidenav").style.boxShadow="none";
     document.getElementById("main").style.marginLeft = "0";
 }
+
+/*
+function openTab(evt, tabName) {
+    // Declare all variables
+    console.log(evt)
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+*/
 
 var mymap = L.map('main').setView([23.5971,121.0126], 8);
 
@@ -40,24 +64,27 @@ L.easyButton({
       }]
 }).addTo(mymap);
 
-function openTab(evt, tabName) {
-    // Declare all variables
-    console.log(evt)
-    var i, tabcontent, tablinks;
+var dataColumn =  ["name","address","supervisor","manager","date","cost","type"]
 
-    // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
+$('.menu .item').tab();
+$('.ui.dropdown').dropdown('set selected', "0");
 
-    // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
+$.getJSON("/data.json", function(data) {
+    data.forEach((place, index) => {
+        L.marker(place.coordinate).addTo(mymap).on('click', function(){
+            openNav();
+            
+            // change to INFO tab
+            $('.ui.menu > .item').removeClass('active');
+            $('.ui.menu > .item[data-tab="info"]').addClass('active');
+            $('.ui.tab').removeClass('active');
+            $('.ui.tab[data-tab="info"]').addClass('active');
 
-    // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
+            dataColumn.forEach(function(col){
+                console.log(col);
+                document.getElementById('info-'+col).innerHTML = place[col];
+            })
+            mymap.setView(place.coordinate, 9);
+        });
+    });
+})
