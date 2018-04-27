@@ -78,3 +78,14 @@
     font-weight: bold !important;
     font-size: 1.2rem !important;
 }
+
+.icon-disabled {
+    cursor: default;
+    opacity: .45!important;
+    background-image: none!important;
+    box-shadow: none!important;
+}
+
+#city-dropdown {
+    display: none;
+}

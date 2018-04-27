@@ -39,7 +39,7 @@
                         </div>
                     </h3>
                     <div class="search-content">
-                        <button class="ui circular facebook icon button">
+                        <button class="ui circular facebook icon button" id="sport-icon">
                             <i class="facebook icon"></i>
                         </button>
                         <button class="ui circular twitter icon button">
@@ -64,18 +64,36 @@
                 <div class="search-content">
                     <span>
                         選擇區域：
-                        <div class="ui selection dropdown">
+                        <div class="ui selection dropdown zone">
                             <input type="hidden" name="gender">
                             <i class="dropdown icon"></i>
                             <div class="default text">請選擇區域</div>
                             <div class="menu">
+                                <div class="item" data-value=0>全部區域</div>
+                                <div class="item" data-value=1>北部</div>
+                                <div class="item" data-value=2>中部</div>
+                                <div class="item" data-value=3>東部</div>
+                                <div class="item" data-value=4>南部</div>
+                                <div class="item" data-value=5>福建金馬</div>
+                            </div>
+                        </div>
+                    </span>
+                    <br>
+                    <br>
+                    <span id="city-dropdown">
+                        選擇地點：
+                        <div class="ui selection dropdown city">
+                            <input type="hidden" name="gender">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">請選擇地點</div>
+                            <!--<div class="menu">
                                 <div class="item" data-value="0">全部區域</div>
                                 <div class="item" data-value="1">北部</div>
                                 <div class="item" data-value="2">中部</div>
                                 <div class="item" data-value="3">東部</div>
                                 <div class="item" data-value="4">西部</div>
                                 <div class="item" data-value="5">南部</div>
-                            </div>
+                            </div>-->
                         </div>
                     </span>
                 </div>
