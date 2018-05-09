@@ -89,3 +89,9 @@
 #city-dropdown {
     display: none;
 }
+
+#plot-area{
+    width: 100%;
+    max-height: 80% !important;
+    height: 100%;
+}

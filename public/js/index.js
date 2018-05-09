@@ -11,6 +11,50 @@ function closeNav() {
 }
 
 
+function openFullNav() {
+    document.getElementById("mySidenav2").style.width = "100%";
+}
+
+function closeFullNav() {
+    document.getElementById("mySidenav2").style.width = "0";
+}
+
+
+
+function openPlot(plot) {
+    openFullNav();
+
+    if (plot == 'type') {
+        var chart = c3.generate({
+            bindto: '#plot-area',
+            data: {
+                columns: [
+                    ['data1', 30, 200, 100, 400, 150, 250],
+                    ['data2', 130, 100, 140, 200, 150, 50]
+                ],
+                type: 'bar'
+            },
+            bar: {
+                width: {
+                    ratio: 0.5 // this makes bar width 50% of length between ticks
+                }
+                // or
+                //width: 100 // this makes bar width 100px
+            },
+        });
+
+        var resizeChart = setInterval(function(){
+            chart.resize();
+        },50)
+
+        setTimeout(function(){
+            clearInterval(resizeChart);
+        },800)
+        
+    }
+}
+
+
 $(document).ready(function() {
     openNav();
     var mymap = L.map('main').setView([23.5971,121.0126], 8);
@@ -41,10 +85,6 @@ $(document).ready(function() {
     $('.zone.ui.dropdown').dropdown('set selected', "0");
     $('.zone.ui.dropdown').dropdown({
         onChange: function(value, text, $selectedItem) {
-            console.log(value);
-            console.log(text);
-            //display: initial;
-            
             switch (value) {
                 case '0':
                   $('#city-dropdown').css('display','none');
@@ -196,7 +236,7 @@ $(document).ready(function() {
                 dataColumn.forEach(function(col){
                     document.getElementById('info-'+col).innerHTML = place[col];
                 })
-                mymap.setView(place.coordinate, 9);
+                mymap.setView(place.coordinate);
             });
         });
     })
@@ -212,3 +252,4 @@ $(document).ready(function() {
     })
 
 })
+

@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
     <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.5.4/c3.min.css">
+
     <title>台灣蚊子館地圖</title>
 
 </head>
@@ -24,7 +28,7 @@
     <div class="container">
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <div class="ui pointing secondary menu">
+            <div class="ui pointing secondary menu tab-menu">
                 <a class="item active" data-tab="search">進階搜索</a>
                 <a class="item" data-tab="plot">圖表呈現</a>
                 <a class="item" data-tab="info">詳細資料</a>
@@ -86,20 +90,16 @@
                             <input type="hidden" name="gender">
                             <i class="dropdown icon"></i>
                             <div class="default text">請選擇地點</div>
-                            <!--<div class="menu">
-                                <div class="item" data-value="0">全部區域</div>
-                                <div class="item" data-value="1">北部</div>
-                                <div class="item" data-value="2">中部</div>
-                                <div class="item" data-value="3">東部</div>
-                                <div class="item" data-value="4">西部</div>
-                                <div class="item" data-value="5">南部</div>
-                            </div>-->
                         </div>
                     </span>
                 </div>
+                <div class="ui huge teal button" onclick="goEvent()">Enter <i class="right arrow icon"></i></div>
             </div>
             <div class="ui tab" data-tab="plot">
-
+                <h3 class="ui header" onclick='openPlot("type")'>
+                        閒置公共設施類型分佈
+                        <div class="sub header">哪種類型的蚊子館分佈最多呢？文教？社福建設？</div>
+                </h3>
             </div>
             <div class="ui tab" data-tab="info">
                 <h2 class="ui header">
@@ -120,6 +120,18 @@
                     <p id="info-type"></p>
                 </h2>
             </div>
+        </div>
+        <div id="mySidenav2" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeFullNav()" style="z-index: 1;">&times;</a>  
+            <div class="ui grid" style="height:100%;">
+                <div class="five wide column">
+                    <h2 id="plot-title">閒置公共設施類型分佈</h2>
+                </div>
+                <div class="eleven wide column">
+                    <svg id="plot-area"></svg>
+
+                </div>
+              </div>
         </div>
 
         <div id="main"></div>
