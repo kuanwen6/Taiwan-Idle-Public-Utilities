@@ -1,3 +1,17 @@
+var citys = [
+    ['臺北市','新北市','基隆市','桃園市','新竹市','新竹縣','宜蘭縣','苗栗縣','臺中市','彰化縣','南投縣','雲林縣','花蓮縣','臺東縣','嘉義市','嘉義縣','臺南市','高雄市','屏東縣','澎湖縣','金門縣','連江縣'],
+    ['臺北市','新北市','基隆市','桃園市','新竹市','新竹縣','宜蘭縣'],
+    ['苗栗縣','臺中市','彰化縣','南投縣','雲林縣'],
+    ['花蓮縣','臺東縣'],
+    ['嘉義市','嘉義縣','臺南市','高雄市','屏東縣','澎湖縣'],
+    ['金門縣','連江縣']
+]
+
+var dataColumn =  ["name","address","supervisor","manager","date","cost","type"]
+
+var mymap, globalData;
+var markers = new L.LayerGroup();
+
 function openNav() {
     document.getElementById("mySidenav").style.width = "380px";
     document.getElementById("mySidenav").style.boxShadow="4px 4px 12px 4px rgba(20%,20%,40%,0.5)";
@@ -10,7 +24,6 @@ function closeNav() {
     document.getElementById("main").style.marginLeft = "0";
 }
 
-
 function openFullNav() {
     document.getElementById("mySidenav2").style.width = "100%";
 }
@@ -18,8 +31,6 @@ function openFullNav() {
 function closeFullNav() {
     document.getElementById("mySidenav2").style.width = "0";
 }
-
-
 
 function openPlot(plot) {
     openFullNav();
@@ -54,10 +65,52 @@ function openPlot(plot) {
     }
 }
 
+function search() {
+    mymap.setView([23.5971,121.0126], 8);
+    mymap.removeLayer(markers);
+
+    markers = new L.LayerGroup();
+
+    var zoneNum = $('.zone.ui.dropdown').dropdown('get value');
+    var cityNum = $('.city.ui.dropdown').dropdown('get value');
+    if (zoneNum == 0) {
+        filterData = globalData;
+    } else {
+        if (cityNum == 0) {
+            filterData = globalData.filter(function(item, index, array){
+                return citys[zoneNum].includes(item.location);
+            });
+        } else {
+            filterData = globalData.filter(function(item, index, array){
+                return item.location == citys[0][cityNum-1];
+            });
+        }
+    }
+    console.log(filterData);
+    filterData.forEach(function(place){
+        L.marker(place.coordinate).addTo(markers).on('click', function(){
+            openNav();
+            
+            // change to INFO tab
+            $('.ui.menu > .item').removeClass('active');
+            $('.ui.menu > .item[data-tab="info"]').addClass('active');
+            $('.ui.tab').removeClass('active');
+            $('.ui.tab[data-tab="info"]').addClass('active');
+    
+            $('.tab[data-tab="info"] .sub.header').show();
+    
+            dataColumn.forEach(function(col){
+                document.getElementById('info-'+col).innerHTML = place[col];
+            })
+            mymap.setView(place.coordinate);
+        });
+    })
+    mymap.addLayer(markers);
+}
 
 $(document).ready(function() {
     openNav();
-    var mymap = L.map('main').setView([23.5971,121.0126], 8);
+    mymap = L.map('main').setView([23.5971,121.0126], 8);
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
         maxZoom: 18,
@@ -78,8 +131,6 @@ $(document).ready(function() {
             }
         }]
     }).addTo(mymap);
-
-    var dataColumn =  ["name","address","supervisor","manager","date","cost","type"]
 
     $('.menu .item').tab();
     $('.zone.ui.dropdown').dropdown('set selected', "0");
@@ -203,10 +254,10 @@ $(document).ready(function() {
                                 value: 0,
                             },{
                                 name: '金門縣',
-                                value: 1,
+                                value: 21,
                             },{
                                 name: '連江縣',
-                                value: 2,
+                                value: 22,
                             }]
                         });
                     $('.city.ui.dropdown').dropdown('set selected', "0");
@@ -221,8 +272,9 @@ $(document).ready(function() {
     $('.tab[data-tab="info"] .sub.header').hide();
 
     $.getJSON("data.json", function(data) {
+        globalData = data;
         data.forEach((place, index) => {
-            L.marker(place.coordinate).addTo(mymap).on('click', function(){
+            L.marker(place.coordinate).addTo(markers).on('click', function(){
                 openNav();
                 
                 // change to INFO tab
@@ -241,6 +293,8 @@ $(document).ready(function() {
         });
     })
 
+    mymap.addLayer(markers);
+
     $('#sport-icon').on('click', function() {
         if ($('#sport-icon').hasClass('icon-disabled')) {
             console.log('y');
@@ -252,4 +306,3 @@ $(document).ready(function() {
     })
 
 })
-
