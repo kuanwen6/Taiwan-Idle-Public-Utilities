@@ -12,6 +12,30 @@ var dataColumn =  ["name","address","supervisor","manager","date","cost","type"]
 var mymap, globalData;
 var markers = new L.LayerGroup();
 
+var normalIcon = L.icon({ iconUrl: 'img/markers/一般.png', iconSize: [52, 56] });
+var normalBuildingIcon = L.icon({ iconUrl: 'img/markers/一般建築.png', iconSize: [48, 50] });
+var trafficIcon = L.icon({ iconUrl: 'img/markers/交通.png', iconSize: [46, 58] });
+var humanitieIcon = L.icon({ iconUrl: 'img/markers/人文.png', iconSize: [58, 68] });
+var businessIcon = L.icon({ iconUrl: 'img/markers/商業.png', iconSize: [50, 56] });
+var sightIcon = L.icon({ iconUrl: 'img/markers/觀光.png', iconSize: [44, 58] });
+var militaryIcon = L.icon({ iconUrl: 'img/markers/特殊(軍事).png', iconSize: [46, 56] });
+var marketIcon = L.icon({ iconUrl: 'img/markers/餐飲.png', iconSize: [50, 54] });
+var buyIcon = L.icon({ iconUrl: 'img/markers/購物.png', iconSize: [40, 58] });
+
+var icons = {
+    '一般': normalIcon,
+    '社福設施暨活動中心': humanitieIcon,
+    '交通建設': trafficIcon,
+    '工商園區': businessIcon, 
+    //'體育場館': 
+    '產業展售場館暨直銷中心': buyIcon,
+    '工程設施': normalBuildingIcon,
+    '軍事設施': militaryIcon,
+    '市場': marketIcon,
+    '休閒育樂設施': sightIcon,
+}
+
+
 function openNav() {
     document.getElementById("mySidenav").style.width = "380px";
     document.getElementById("mySidenav").style.boxShadow="4px 4px 12px 4px rgba(20%,20%,40%,0.5)";
@@ -88,7 +112,12 @@ function search() {
     }
     console.log(filterData);
     filterData.forEach(function(place){
-        L.marker(place.coordinate).addTo(markers).on('click', function(){
+        var i = icons[place.type];
+        if (typeof i === "undefined") {
+            i = normalIcon;
+        }
+
+        L.marker(place.coordinate, {icon: i}).addTo(markers).on('click', function(){
             openNav();
             
             // change to INFO tab
@@ -274,7 +303,13 @@ $(document).ready(function() {
     $.getJSON("data.json", function(data) {
         globalData = data;
         data.forEach((place, index) => {
-            L.marker(place.coordinate).addTo(markers).on('click', function(){
+            //console.log()
+            var i = icons[place.type];
+            if (typeof i === "undefined") {
+                i = normalIcon;
+            }
+
+            L.marker(place.coordinate, {icon: i}).addTo(markers).on('click', function(){
                 openNav();
                 
                 // change to INFO tab
