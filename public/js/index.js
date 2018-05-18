@@ -12,15 +12,16 @@ var dataColumn =  ["name","address","supervisor","manager","date","cost","type"]
 var mymap, globalData;
 var markers = new L.LayerGroup();
 
-var normalIcon = L.icon({ iconUrl: 'img/markers/一般.png', iconSize: [52, 56] });
-var normalBuildingIcon = L.icon({ iconUrl: 'img/markers/一般建築.png', iconSize: [48, 50] });
-var trafficIcon = L.icon({ iconUrl: 'img/markers/交通.png', iconSize: [46, 58] });
-var humanitieIcon = L.icon({ iconUrl: 'img/markers/人文.png', iconSize: [58, 68] });
-var businessIcon = L.icon({ iconUrl: 'img/markers/商業.png', iconSize: [50, 56] });
-var sightIcon = L.icon({ iconUrl: 'img/markers/觀光.png', iconSize: [44, 58] });
-var militaryIcon = L.icon({ iconUrl: 'img/markers/特殊(軍事).png', iconSize: [46, 56] });
-var marketIcon = L.icon({ iconUrl: 'img/markers/餐飲.png', iconSize: [50, 54] });
-var buyIcon = L.icon({ iconUrl: 'img/markers/購物.png', iconSize: [40, 58] });
+
+var normalIcon = L.AwesomeMarkers.icon({ icon: 'home', markerColor: 'red', prefix: 'fa' });
+var normalBuildingIcon = L.AwesomeMarkers.icon({ icon: 'industry', markerColor: 'red', prefix: 'fa' });
+var trafficIcon = L.AwesomeMarkers.icon({ icon: 'bus', markerColor: 'red', prefix: 'fa' });
+var humanitieIcon = L.AwesomeMarkers.icon({ icon: 'users', markerColor: 'red', prefix: 'fa' });
+var businessIcon = L.AwesomeMarkers.icon({ icon: 'suitcase', markerColor: 'red', prefix: 'fa' });
+var sightIcon = L.AwesomeMarkers.icon({ icon: 'flag', markerColor: 'red', prefix: 'fa' }); 
+var militaryIcon = L.AwesomeMarkers.icon({ icon: 'bomb', markerColor: 'red', prefix: 'fa' });
+var marketIcon = L.AwesomeMarkers.icon({ icon: 'shopping-cart', markerColor: 'red', prefix: 'fa' });
+var buyIcon  = L.AwesomeMarkers.icon({ icon: 'handshake-o', markerColor: 'red', prefix: 'fa' });
 
 var icons = {
     '一般': normalIcon,
