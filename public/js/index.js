@@ -14,14 +14,14 @@ var markers = new L.LayerGroup();
 
 
 var normalIcon = L.AwesomeMarkers.icon({ icon: 'home', markerColor: 'red', prefix: 'fa' });
-var normalBuildingIcon = L.AwesomeMarkers.icon({ icon: 'industry', markerColor: 'red', prefix: 'fa' });
-var trafficIcon = L.AwesomeMarkers.icon({ icon: 'bus', markerColor: 'red', prefix: 'fa' });
-var humanitieIcon = L.AwesomeMarkers.icon({ icon: 'users', markerColor: 'red', prefix: 'fa' });
-var businessIcon = L.AwesomeMarkers.icon({ icon: 'suitcase', markerColor: 'red', prefix: 'fa' });
-var sightIcon = L.AwesomeMarkers.icon({ icon: 'flag', markerColor: 'red', prefix: 'fa' }); 
-var militaryIcon = L.AwesomeMarkers.icon({ icon: 'bomb', markerColor: 'red', prefix: 'fa' });
-var marketIcon = L.AwesomeMarkers.icon({ icon: 'shopping-cart', markerColor: 'red', prefix: 'fa' });
-var buyIcon  = L.AwesomeMarkers.icon({ icon: 'handshake-o', markerColor: 'red', prefix: 'fa' });
+var normalBuildingIcon = L.AwesomeMarkers.icon({ icon: 'industry', markerColor: 'orange', prefix: 'fa' });
+var trafficIcon = L.AwesomeMarkers.icon({ icon: 'bus', markerColor: 'cadetblue', prefix: 'fa' });
+var humanitieIcon = L.AwesomeMarkers.icon({ icon: 'users', markerColor: 'green', prefix: 'fa' });
+var businessIcon = L.AwesomeMarkers.icon({ icon: 'suitcase', markerColor: 'blue', prefix: 'fa' });
+var sightIcon = L.AwesomeMarkers.icon({ icon: 'flag', markerColor: 'darkgreen', prefix: 'fa' }); 
+var militaryIcon = L.AwesomeMarkers.icon({ icon: 'bomb', markerColor: 'purple', prefix: 'fa' });
+var marketIcon = L.AwesomeMarkers.icon({ icon: 'shopping-cart', markerColor: 'darkred', prefix: 'fa' });
+var buyIcon  = L.AwesomeMarkers.icon({ icon: 'handshake-o', markerColor: 'darkpurple', prefix: 'fa' });
 
 var icons = {
     '一般': normalIcon,
