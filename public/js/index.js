@@ -38,7 +38,7 @@ var icons = {
 
 
 function openNav() {
-    document.getElementById("mySidenav").style.width = "380px";
+    document.getElementById("mySidenav").style.width = "390px";
     document.getElementById("mySidenav").style.boxShadow="4px 4px 12px 4px rgba(20%,20%,40%,0.5)";
     document.getElementById("main").style.marginLeft = "190px";
 }
@@ -132,6 +132,7 @@ function search() {
             dataColumn.forEach(function(col){
                 document.getElementById('info-'+col).innerHTML = place[col];
             })
+            document.getElementById('info-image').innerHTML = '<img src="img/example.jpg" style="width:100%;object-fit: cover;margin-top: 18px; height: 30vh;">';
             mymap.setView(place.coordinate);
         });
     })
@@ -324,6 +325,7 @@ $(document).ready(function() {
                 dataColumn.forEach(function(col){
                     document.getElementById('info-'+col).innerHTML = place[col];
                 })
+                document.getElementById('info-image').innerHTML = '<img src="img/example.jpg" style="width:100%;object-fit: cover;margin-top: 18px; height: 30vh;">';
                 mymap.setView(place.coordinate);
             });
         });
