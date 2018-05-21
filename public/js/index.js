@@ -24,16 +24,52 @@ var marketIcon = L.AwesomeMarkers.icon({ icon: 'shopping-cart', markerColor: 'da
 var buyIcon  = L.AwesomeMarkers.icon({ icon: 'handshake-o', markerColor: 'darkpurple', prefix: 'fa' });
 
 var icons = {
-    '一般': normalIcon,
-    '社福設施暨活動中心': humanitieIcon,
-    '交通建設': trafficIcon,
-    '工商園區': businessIcon, 
+    '一般': {
+        'color':'#d63e2a',
+        'icon': 'fa fa-home',
+        'marker': normalIcon
+    } ,
+    '社福設施暨活動中心': {
+        'color':'#72af26',
+        'icon': 'fa fa-users',
+        'marker': humanitieIcon
+    },
+    '交通建設': {
+        'color':'#436877',
+        'icon': 'fa fa-bus',
+        'marker': trafficIcon
+    },
+    '工商園區': {
+        'color':'#38a7d9',
+        'icon': 'fa fa-suitcase',
+        'marker': businessIcon
+    },
     //'體育場館': 
-    '產業展售場館暨直銷中心': buyIcon,
-    '工程設施': normalBuildingIcon,
-    '軍事設施': militaryIcon,
-    '市場': marketIcon,
-    '休閒育樂設施': sightIcon,
+    '產業展售場館暨直銷中心': {
+        'color':'#5b3a6a',
+        'icon': 'fa fa-handshake-o',
+        'marker': buyIcon
+    },
+    '工程設施': {
+        'color':'#f2942f',
+        'icon': 'fa fa-industry',
+        'marker': normalBuildingIcon
+    },
+    '軍事設施': {
+        'color':'#d252b9',
+        'icon': 'fa fa-bomb',
+        'marker': militaryIcon
+    },
+    '市場': {
+        'color':'#a23336',
+        'icon': 'fa fa-shopping-cart',
+        'marker': marketIcon
+    },
+    '休閒育樂設施': {
+        'color':'#718225',
+        'icon': 'fa fa-flag',
+        'marker': sightIcon
+    }
 }
 
 
@@ -113,9 +149,11 @@ function search() {
     }
     console.log(filterData);
     filterData.forEach(function(place){
-        var i = icons[place.type];
+        var i = icons[place.type]['marker'];
         if (typeof i === "undefined") {
             i = normalIcon;
+        } else {
+            i = icons[place.type]['marker'];
         }
 
         L.marker(place.coordinate, {icon: i}).addTo(markers).on('click', function(){
@@ -309,6 +347,8 @@ $(document).ready(function() {
             var i = icons[place.type];
             if (typeof i === "undefined") {
                 i = normalIcon;
+            } else {
+                i = icons[place.type]['marker'];
             }
 
             L.marker(place.coordinate, {icon: i}).addTo(markers).on('click', function(){
@@ -333,14 +373,20 @@ $(document).ready(function() {
 
     mymap.addLayer(markers);
 
-    $('#sport-icon').on('click', function() {
-        if ($('#sport-icon').hasClass('icon-disabled')) {
-            console.log('y');
-            $('#sport-icon').removeClass('icon-disabled');
-        } else {
-            console.log('n');
-            $('#sport-icon').addClass('icon-disabled');
-        }    
-    })
 
+    var idx = 0;
+    for(var i in icons) { 
+        $('#c-'+(idx)).html('<button class="circular ui icon button" style="background-color:'+ icons[i]['color'] +' ;color:white">' +
+        '<i class="' + icons[i]['icon'] + '"></i>' +
+      '</button>');
+      idx++;
+    }
+
+    $('.fliter-btn').on('click', function(t) {
+        if ($(this).hasClass('icon-disabled')) {
+            $(this).removeClass('icon-disabled');
+        } else {
+            $(this).addClass('icon-disabled');
+        } 
+    })
 })
