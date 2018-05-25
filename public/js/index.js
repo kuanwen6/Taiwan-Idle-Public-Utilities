@@ -9,6 +9,7 @@ var citys = [
 
 var dataColumn =  ["name","address","supervisor","manager","date","cost","type"]
 
+
 var mymap, globalData;
 var markers = new L.LayerGroup();
 
@@ -72,6 +73,7 @@ var icons = {
     }
 }
 
+var keys = Object.keys(icons);
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "390px";
@@ -132,6 +134,12 @@ function search() {
 
     markers = new L.LayerGroup();
 
+    var f = [];
+    $('.icon-disabled').each(function(i, obj) {
+        var idx = parseInt(obj.id.substring(2))
+        f.push(keys[idx]);
+    });
+
     var zoneNum = $('.zone.ui.dropdown').dropdown('get value');
     var cityNum = $('.city.ui.dropdown').dropdown('get value');
     if (zoneNum == 0) {
@@ -147,9 +155,10 @@ function search() {
             });
         }
     }
-    console.log(filterData);
     filterData.forEach(function(place){
-        var i = icons[place.type]['marker'];
+        if (f.includes(place.type)) { return }
+
+        var i = icons[place.type];
         if (typeof i === "undefined") {
             i = normalIcon;
         } else {
@@ -175,6 +184,8 @@ function search() {
         });
     })
     mymap.addLayer(markers);
+
+    
 }
 
 $(document).ready(function() {
@@ -337,13 +348,13 @@ $(document).ready(function() {
             }
           }
       });
+    
 
     $('.tab[data-tab="info"] .sub.header').hide();
 
     $.getJSON("data.json", function(data) {
         globalData = data;
         data.forEach((place, index) => {
-            //console.log()
             var i = icons[place.type];
             if (typeof i === "undefined") {
                 i = normalIcon;
@@ -373,16 +384,16 @@ $(document).ready(function() {
 
     mymap.addLayer(markers);
 
-
-    var idx = 0;
-    for(var i in icons) { 
-        $('#c-'+(idx)).html('<button class="circular ui icon button" style="background-color:'+ icons[i]['color'] +' ;color:white">' +
-        '<i class="' + icons[i]['icon'] + '"></i>' +
+    for (var i=0 ; i<keys.length ; i++) {
+        $('#c-'+(i)).html('<button class="circular ui icon button" style="background-color:'+ icons[keys[i]]['color'] +' ;color:white">' +
+        '<i class="' + icons[keys[i]]['icon'] + '"></i>' +
       '</button>');
-      idx++;
+      $('#c-'+i).attr("data-content", keys[i]);
     }
 
-    $('.fliter-btn').on('click', function(t) {
+    $('.fliter-btn').popup();
+
+    $('.fliter-btn').on('click', function() {
         if ($(this).hasClass('icon-disabled')) {
             $(this).removeClass('icon-disabled');
         } else {

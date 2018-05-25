@@ -99,3 +99,7 @@
 .fliter-btn {
     width: 14.5%!important;
 }
+
+.icon-disabled{
+    opacity: 0.25!important;
+}
