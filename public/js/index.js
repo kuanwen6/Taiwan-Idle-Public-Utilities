@@ -25,7 +25,7 @@ var marketIcon = L.AwesomeMarkers.icon({ icon: 'shopping-cart', markerColor: 'da
 var buyIcon  = L.AwesomeMarkers.icon({ icon: 'handshake-o', markerColor: 'darkpurple', prefix: 'fa' });
 
 var icons = {
-    '一般': {
+    '其他': {
         'color':'#d63e2a',
         'icon': 'fa fa-home',
         'marker': normalIcon
@@ -104,7 +104,6 @@ function openPlot(plot) {
             data: {
                 columns: [
                     ['data1', 30, 200, 100, 400, 150, 250],
-                    ['data2', 130, 100, 140, 200, 150, 50]
                 ],
                 type: 'bar'
             },
@@ -115,6 +114,15 @@ function openPlot(plot) {
                 // or
                 //width: 100 // this makes bar width 100px
             },
+            tooltip: {
+                format: {
+                    title: function (d) { return 'Data ' + d; },
+                    value: function (value, ratio, id) {
+                        var format = id === 'data1' ? d3.format(',') : d3.format('$');
+                        return format(value);
+                    }
+                }
+            }
         });
 
         var resizeChart = setInterval(function(){
@@ -161,6 +169,7 @@ function search() {
         var i = icons[place.type];
         if (typeof i === "undefined") {
             i = normalIcon;
+            if (f.includes('其他')) { return }
         } else {
             i = icons[place.type]['marker'];
         }
@@ -349,20 +358,28 @@ $(document).ready(function() {
           }
       });
     
+    for (var i=0 ; i<keys.length ; i++) {
+        $('#c-'+(i)).html('<button class="circular ui icon button" style="background-color:'+ icons[keys[i]]['color'] +' ;color:white">' +
+        '<i class="' + icons[keys[i]]['icon'] + '"></i>' +
+      '</button>');
+      $('#c-'+i).attr("data-content", keys[i]);
+    }
+    
+    $('.fliter-btn').popup();
 
     $('.tab[data-tab="info"] .sub.header').hide();
 
     $.getJSON("data.json", function(data) {
         globalData = data;
         data.forEach((place, index) => {
-            var i = icons[place.type];
-            if (typeof i === "undefined") {
-                i = normalIcon;
+            var ic = icons[place.type];
+            if (typeof ic === "undefined") {
+                ic = normalIcon;
             } else {
-                i = icons[place.type]['marker'];
+                ic = icons[place.type]['marker'];
             }
 
-            L.marker(place.coordinate, {icon: i}).addTo(markers).on('click', function(){
+            L.marker(place.coordinate, {icon: ic}).addTo(markers).on('click', function(){
                 openNav();
                 
                 // change to INFO tab
@@ -383,16 +400,7 @@ $(document).ready(function() {
     })
 
     mymap.addLayer(markers);
-
-    for (var i=0 ; i<keys.length ; i++) {
-        $('#c-'+(i)).html('<button class="circular ui icon button" style="background-color:'+ icons[keys[i]]['color'] +' ;color:white">' +
-        '<i class="' + icons[keys[i]]['icon'] + '"></i>' +
-      '</button>');
-      $('#c-'+i).attr("data-content", keys[i]);
-    }
-
-    $('.fliter-btn').popup();
-
+    
     $('.fliter-btn').on('click', function() {
         if ($(this).hasClass('icon-disabled')) {
             $(this).removeClass('icon-disabled');
