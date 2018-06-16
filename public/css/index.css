@@ -1,3 +1,15 @@
+/*
+@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+
+body * {
+    font-family: 'cwTeXYen', sans-serif;
+}
+*/
+
+.sidenav::-webkit-scrollbar { 
+    display: none; 
+}
+
 /* The side navigation menu */
 .sidenav {
     height: 100%; /* 100% Full-height */
@@ -129,4 +141,15 @@
 
 .info-seg {
     display: none;
+}
+
+.title-seg {
+    background-color: #f6f8fa !important;
+    font-weight: bold;
+    font-size: 1.3rem !important;
+    padding: 0.9rem !important;
+}
+
+.plot-segs {
+    cursor: pointer;
 }

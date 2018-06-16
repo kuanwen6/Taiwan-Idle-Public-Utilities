@@ -99,10 +99,22 @@
                 <div class="ui huge teal button" onclick="search()">Enter&nbsp;&nbsp;<i class="fa fa-search"></i></div>
             </div>
             <div class="ui tab" data-tab="plot">
-                <h3 class="ui header" onclick='openPlot("type")'>
-                        閒置公共設施類型分佈
-                        <div class="sub header">哪種類型的蚊子館分佈最多呢？文教？社福建設？</div>
-                </h3>
+                <div class="ui segments plot-segs">
+                    <div class="ui segment title-seg" onclick='openPlot("type")'>
+                        <p><i class="fa fa-list-ol"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;閒置公共設施類型分佈</p>
+                    </div>
+                    <div class="ui segment">
+                        <p>哪種類型的蚊子館分佈最多呢？文教？社福建設？</p>
+                    </div>
+                </div>
+                <div class="ui segments plot-segs">
+                        <div class="ui segment title-seg">
+                            <p><i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;設施開工年份分佈</p>
+                        </div>
+                        <div class="ui segment">
+                            <p>是從哪一年政府開始建造這些蚊子館的呢？</p>
+                        </div>
+                    </div>
             </div>
             <div class="ui tab" data-tab="info">
                 <h2 class="ui header">
