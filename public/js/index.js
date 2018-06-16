@@ -142,6 +142,10 @@ function search() {
 
     markers = new L.LayerGroup();
 
+    $('.info-seg').css('display', 'none');
+    $('#info-name').html('尚未選取地點');
+    $('#info-image').html('');
+
     var f = [];
     $('.icon-disabled').each(function(i, obj) {
         var idx = parseInt(obj.id.substring(2))
@@ -175,6 +179,7 @@ function search() {
         }
 
         L.marker(place.coordinate, {icon: i}).addTo(markers).on('click', function(){
+            $('.info-seg').css('display', 'block');
             openNav();
             
             // change to INFO tab
@@ -188,7 +193,7 @@ function search() {
             dataColumn.forEach(function(col){
                 document.getElementById('info-'+col).innerHTML = place[col];
             })
-            document.getElementById('info-image').innerHTML = '<img src="img/example.jpg" style="width:100%;object-fit: cover;margin-top: 18px; height: 30vh;">';
+            document.getElementById('info-image').innerHTML = '<img class="ui rounded image" src="img/example.jpg" style="width:100%;object-fit: cover;margin-top: 18px; height: 30vh;">';
             mymap.setView(place.coordinate);
         });
     })
@@ -359,9 +364,16 @@ $(document).ready(function() {
       });
     
     for (var i=0 ; i<keys.length ; i++) {
+      if (keys[i] == '產業展售場館暨直銷中心') {
+        $('#c-'+(i)).html('<button class="circular ui icon button" style="padding: .78571429em .64341429em .78571429em;background-color:'+ icons[keys[i]]['color'] +' ;color:white">' +
+        '<i class="' + icons[keys[i]]['icon'] + '"></i>' +
+        '</button>');
+      } else {
         $('#c-'+(i)).html('<button class="circular ui icon button" style="background-color:'+ icons[keys[i]]['color'] +' ;color:white">' +
         '<i class="' + icons[keys[i]]['icon'] + '"></i>' +
-      '</button>');
+        '</button>');
+      }
+      
       $('#c-'+i).attr("data-content", keys[i]);
     }
     
@@ -380,6 +392,7 @@ $(document).ready(function() {
             }
 
             L.marker(place.coordinate, {icon: ic}).addTo(markers).on('click', function(){
+                $('.info-seg').css('display', 'block');
                 openNav();
                 
                 // change to INFO tab
@@ -393,7 +406,7 @@ $(document).ready(function() {
                 dataColumn.forEach(function(col){
                     document.getElementById('info-'+col).innerHTML = place[col];
                 })
-                document.getElementById('info-image').innerHTML = '<img src="img/example.jpg" style="width:100%;object-fit: cover;margin-top: 18px; height: 30vh;">';
+                document.getElementById('info-image').innerHTML = '<img class="ui rounded image" src="img/example.jpg" style="width:100%;object-fit: cover;margin-top: 18px; height: 30vh;">';
                 mymap.setView(place.coordinate);
             });
         });

@@ -118,3 +118,15 @@
     margin: 0 !important;
     margin-bottom: 1rem !important;
 }
+
+.ui.huge.button {
+    padding: .68571429em 1.1em .68571429em !important;
+}
+
+.fa-search {
+    transform: rotate(90deg);
+}
+
+.info-seg {
+    display: none;
+}

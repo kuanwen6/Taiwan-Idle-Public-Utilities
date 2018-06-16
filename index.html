@@ -96,7 +96,7 @@
                         </div>
                     </span>
                 </div>
-                <div class="ui huge teal button" onclick="search()">Enter <i class="right arrow icon"></i></div>
+                <div class="ui huge teal button" onclick="search()">Enter&nbsp;&nbsp;<i class="fa fa-search"></i></div>
             </div>
             <div class="ui tab" data-tab="plot">
                 <h3 class="ui header" onclick='openPlot("type")'>
@@ -106,12 +106,12 @@
             </div>
             <div class="ui tab" data-tab="info">
                 <h2 class="ui header">
-                    <span id="info-name">尚未選取地點</span>
+                    <span id="info-name" style="padding-left: 5px;">尚未選取地點</span>
                     <br>
                     <div id="info-image">
                     </div>
-                    
-                    <div class="sub header" style="margin-top: 18px;">設施地址</div>
+                    <div class="ui segment info-seg">
+                    <div class="sub header" style="margin-top: 0px !important;">設施地址</div>
                     <p id="info-address"></p>
 
                     <div class="sub header">主管機關</div>
@@ -124,6 +124,7 @@
                     <p id="info-cost"></p>
                     <div class="sub header">類別</div>
                     <p id="info-type"></p>
+                    </div>
                 </h2>
             </div>
         </div>
