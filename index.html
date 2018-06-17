@@ -9,13 +9,13 @@
     <link href="lib/semantic/semantic.min.css" rel="stylesheet" type="text/css" />
     <script src="lib/semantic/semantic.min.js"></script>
     <link rel="stylesheet" href="lib/fontawesome/css/font-awesome.min.css">
-    
-    <link rel="stylesheet" href="lib/leaflet/leaflet.css"/>
+
+    <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
     <script src="lib/leaflet/leaflet.js"></script>
-    
+
     <link rel="stylesheet" href="lib/easy-button/easy-button.css">
     <script src="lib/easy-button/easy-button.js"></script>
-    
+
     <script src="lib/d3.min.js"></script>
     <script src="lib/c3/c3.min.js"></script>
     <link rel="stylesheet" href="lib/c3/c3.min.css">
@@ -32,14 +32,15 @@
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <div class="ui pointing secondary menu tab-menu" style="background-color:#949292;">
-                <a class="item active" data-tab="search" >進階搜索</a>
-                <a class="item" data-tab="plot" >圖表呈現</a>
-                <a class="item" data-tab="info" >詳細資料</a>
+                <a class="item active" data-tab="search">進階搜索</a>
+                <a class="item" data-tab="plot">圖表呈現</a>
+                <a class="item" data-tab="info">詳細資料</a>
             </div>
             <div class="ui tab active" data-tab="search">
                 <div>
                     <h3 class="ui header">
-                        <img class="ui image" src="img/test.svg">
+                        <!--<img class="ui image" src="img/test.svg">-->
+                        <i class="fa fa-list-alt" style="font-size: 3rem;padding-right: 1rem;"></i>
                         <div class="content">
                             選擇顯示類別
                             <div class="sub header">點擊後可以選擇是否在地圖上顯示該類別</div>
@@ -62,7 +63,8 @@
                 </div>
                 <br>
                 <h3 class="ui header">
-                    <img class="ui image" src="img/signpost.svg">
+                    <!--<img class="ui image" src="img/signpost.svg">-->
+                    <i class="fa fa-map-marker" style="font-size: 3rem;padding-right: 1rem;padding-left: 0.5rem;"></i>
                     <div class="content">
                         選擇顯示地區
                         <div class="sub header">顯示所選區域之閒置公共設施</div>
@@ -108,13 +110,22 @@
                     </div>
                 </div>
                 <div class="ui segments plot-segs">
-                        <div class="ui segment title-seg">
-                            <p><i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;設施開工年份分佈</p>
-                        </div>
-                        <div class="ui segment">
-                            <p>是從哪一年政府開始建造這些蚊子館的呢？</p>
-                        </div>
+                    <div class="ui segment title-seg">
+                        <p><i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;設施開工年份分佈</p>
                     </div>
+                    <div class="ui segment">
+                        <p>是從哪一年政府開始建造這些蚊子館的呢？</p>
+                    </div>
+                </div>
+                <div class="ui segments plot-segs">
+                    <div class="ui segment title-seg">
+                        <p><i class="fa fa-map"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;各地區閒置公共設施數目統計</p>
+                    </div>
+                    <div class="ui segment">
+                        <p>是哪個縣市蓋了最多的蚊子館呢？</p>
+                    </div>
+                </div>
+
             </div>
             <div class="ui tab" data-tab="info">
                 <h2 class="ui header">
@@ -123,25 +134,25 @@
                     <div id="info-image">
                     </div>
                     <div class="ui segment info-seg">
-                    <div class="sub header" style="margin-top: 0px !important;">設施地址</div>
-                    <p id="info-address"></p>
+                        <div class="sub header" style="margin-top: 0px !important;">設施地址</div>
+                        <p id="info-address"></p>
 
-                    <div class="sub header">主管機關</div>
-                    <p id="info-supervisor"></p>
-                    <div class="sub header">管理機關</div>
-                    <p id="info-manager"></p>
-                    <div class="sub header">製造日期</div>
-                    <p id="info-date"></p>
-                    <div class="sub header">建造經費</div>
-                    <p id="info-cost"></p>
-                    <div class="sub header">類別</div>
-                    <p id="info-type"></p>
+                        <div class="sub header">主管機關</div>
+                        <p id="info-supervisor"></p>
+                        <div class="sub header">管理機關</div>
+                        <p id="info-manager"></p>
+                        <div class="sub header">製造日期</div>
+                        <p id="info-date"></p>
+                        <div class="sub header">建造經費</div>
+                        <p id="info-cost"></p>
+                        <div class="sub header">類別</div>
+                        <p id="info-type"></p>
                     </div>
                 </h2>
             </div>
         </div>
         <div id="mySidenav2" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeFullNav()" style="z-index: 1;">&times;</a>  
+            <a href="javascript:void(0)" class="closebtn" onclick="closeFullNav()" style="z-index: 1;">&times;</a>
             <div class="ui grid" style="height:100%;">
                 <div class="five wide column">
                     <h2 id="plot-title">閒置公共設施類型分佈</h2>
@@ -153,7 +164,7 @@
                     <div id="plot-area"></div>
 
                 </div>
-              </div>
+            </div>
         </div>
 
         <div id="main"></div>
