@@ -99,6 +99,9 @@ function openPlot(plot) {
     openFullNav();
 
     if (plot == 'type') {
+        $('#plot-title').html('<i class="fa fa-list-ol"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;閒置公共設施類型分佈');
+
+
         var chart = c3.generate({
             bindto: '#plot-area',
             data: {
@@ -133,6 +136,48 @@ function openPlot(plot) {
             clearInterval(resizeChart);
         },800)
         
+    } else if (plot == 'build') {
+        $('#plot-title').html('<i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;設施開工年份分佈');
+
+        var count = [0,0,0,0,0,0,0]
+        globalData.forEach(function(place) {
+            y = place.startYear;
+            index = Math.floor((y - 1950) / 10);
+            count[index] = count[index] + 1
+        })
+        console.log(count);
+
+        var chart = c3.generate({
+            bindto: '#plot-area',
+            data: {
+                columns: [
+                    ['閒置公共設施數目', count[0], count[1], count[2], count[3], count[4], count[5], count[6]],
+                ], 
+                //type: 'area',
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    categories: ['1950s', '1960s', '1970s', '1980s', '1990s', '2000s', '2010s']
+                }
+            },
+            tooltip: {
+                format: {
+                    title: function (d) { return  (1950 + d*10).toString() + ' 年代'; },
+                    value: function (value, ratio, id) {
+                        return value.toString() + ' 個';
+                    }
+                }
+            }
+        });
+
+        var resizeChart = setInterval(function(){
+            chart.resize();
+        },50)
+
+        setTimeout(function(){
+            clearInterval(resizeChart);
+        },800)
     }
 }
 

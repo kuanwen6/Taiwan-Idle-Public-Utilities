@@ -22,6 +22,7 @@
 
     <link rel="stylesheet" href="lib/markers/leaflet.awesome-markers.css">
     <script src="lib/markers/leaflet.awesome-markers.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/notosans/notosanstc.css">
 
     <title>台灣蚊子館地圖</title>
 
@@ -109,7 +110,7 @@
                         <p>哪種類型的蚊子館分佈最多呢？文教？社福建設？</p>
                     </div>
                 </div>
-                <div class="ui segments plot-segs">
+                <div class="ui segments plot-segs" onclick='openPlot("build")'>
                     <div class="ui segment title-seg">
                         <p><i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;設施開工年份分佈</p>
                     </div>
@@ -155,10 +156,8 @@
             <a href="javascript:void(0)" class="closebtn" onclick="closeFullNav()" style="z-index: 1;">&times;</a>
             <div class="ui grid" style="height:100%;">
                 <div class="five wide column">
-                    <h2 id="plot-title">閒置公共設施類型分佈</h2>
-                    <br><br><br>
-                    <p>文教： ＸＸＸＸ</p>
-                    <p>社福： ＸＸＸＸ</p>
+                    <h2 id="plot-title"></h2>
+                    <div class="plot-content"></div>
                 </div>
                 <div class="eleven wide column">
                     <div id="plot-area"></div>
