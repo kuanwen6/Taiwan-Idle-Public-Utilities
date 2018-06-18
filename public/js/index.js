@@ -99,7 +99,7 @@ function openPlot(plot) {
     openFullNav();
 
     if (plot == 'type') {
-        $('#plot-title').html('<i class="fa fa-list-ol"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;閒置公共設施類型分佈');
+        $('#plot-title').html('<i class="fa fa-list-ol"></i>&nbsp;&nbsp;&nbsp;&nbsp;閒置公共設施類型分佈');
 
 
         var chart = c3.generate({
@@ -137,7 +137,12 @@ function openPlot(plot) {
         },800)
         
     } else if (plot == 'build') {
-        $('#plot-title').html('<i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;設施開工年份分佈');
+        $('#plot-title').html('<i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;設施開工年份分佈');
+        $('.plot-content').html('<p>-政府到底是從哪一年開始建造這些蚊子館的呢？-</p>' +
+                                                '<span>閒置公共設施每年隨著時間不斷的增加，</span><br>' +
+                                                '<span>那怕舉債累累，政府卻依舊好似沒有看見一般，不斷的在各地興建所謂的「蚊子館」。</span><br>' +
+                                                '<span>其中又是在哪個年份興建最多呢？</span><br>' +
+                                                '<span>其中是否有些緣由？讓我們一起來看看吧！<span>')
 
         var count = [0,0,0,0,0,0,0]
         globalData.forEach(function(place) {

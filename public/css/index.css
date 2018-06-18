@@ -166,5 +166,18 @@ i.fa {
 }
 
 #plot-title {
-    padding: 2rem;
+    padding: 2rem 2rem 0 2rem;
+    font-size: 2rem;
+}
+
+.plot-content {
+    padding: 0 1rem 0 1rem;
+}
+
+.plot-content p{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.plot-content span{
+    color: rgba(0,0,0,.7);
 }
