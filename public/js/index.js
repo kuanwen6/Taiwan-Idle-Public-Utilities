@@ -294,6 +294,122 @@ function openPlot(plot) {
         setTimeout(function(){
             clearInterval(resizeChart);
         },800)
+    } else if (plot == 'location') {
+        var count = [0,0,0,0,0,0,0]
+        globalData.forEach(function(place) {
+            y = place.startYear;
+            index = Math.floor((y - 1950) / 10);
+            count[index] = count[index] + 1
+        })
+
+        
+        var tmp = count.slice();
+        tmp.sort(sortNumber);
+            
+
+        $('#plot-title').html('<i class="fa fa-map"></i>&nbsp;&nbsp;&nbsp;&nbsp;各地區閒置公共設施數目統計');
+        $('.bulleted > .item').html('各地區閒置公共設施/個數長條圖');
+        $('.plot-content').html('<p class="sec-title">-是哪個縣市蓋了最多的蚊子館呢？-</p>' +
+                                                '<div class="plot-description"><span>閒置公共設施分布在各個縣市，</span><br>' +
+                                                '<span>從台北、新竹...到高雄，甚至是金馬外島都有。</span><br>' +
+                                                '<span>其中又是在哪個縣市興建的最多呢？</span><br>' +
+                                                '<span>到底是哪個縣市有這個閒錢呢？讓我們一起來看看吧！<span></div><br><div class="ui segment"><div class="plot-table" style="padding: 1rem 1rem 1rem 1rem;"></div></div>');
+
+        $('.plot-table').html('<div id="plot-area2" style="margin: 0 auto;width: 220px;text-align: center;"></div>');
+
+        var place_count = {};
+        for (var i=0; i<citys[0].length; i++) {
+            place_count[citys[0][i]] = 0;
+        }
+
+        globalData.forEach(function(place) {
+            place_count[place.location] = place_count[place.location] + 1;
+        })
+
+        var columnsData = ['閒置公共設施所在地區'];
+        for (var i=0; i<citys[0].length; i++) {
+            columnsData.push(place_count[citys[0][i]]);
+        }
+
+        var chart = c3.generate({
+            bindto: '#plot-area',
+            data: {
+                columns: [
+                    columnsData,
+                ],
+                type: 'bar'
+            },
+            bar: {
+                width: {
+                    ratio: 0.5 // this makes bar width 50% of length between ticks
+                }
+                // or
+                //width: 100 // this makes bar width 100px
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    categories: citys[0],
+                },
+                rotated: true,
+                y : {
+                    tick: {
+                        format: function(x) { return x % 1 === 0 ? x : ''; }
+                    }
+                }
+            },
+            tooltip: {
+                format: {
+                    title: function (d) { return citys[0][d]; },
+                    value: function (value, ratio, id) {
+                        return value.toString() + ' 個';
+                    }
+                }
+            }
+        });
+
+        var resizeChart = setInterval(function(){
+            chart.resize();
+        },50)
+
+        setTimeout(function(){
+            clearInterval(resizeChart);
+        },800)
+
+        var columnsData2 = [];
+        for (var j=0; j<keys.length; j++) {
+            columnsData2.push([citys[0][j], place_count[citys[0][j]]]);
+        }
+
+        var chart2 = c3.generate({
+            bindto: '#plot-area2',
+            data: {
+                columns: columnsData2,
+                type : 'donut',
+                onclick: function (d, i) { console.log("onclick", d, i); },
+                onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+                onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+            },
+            donut: {
+                title: "蚊子館地區分佈"
+            }
+        });
+
+        var resizeChart2 = setInterval(function(){
+            chart2.resize();
+        },50)
+
+        setTimeout(function(){
+            clearInterval(resizeChart2);
+        },800)
+
+        $('.plot-table').append('<p style="color:red;font-weight:bold;">＊ 點擊圖標可篩選所選類別</p>');
+
+        /*
+        var keysSorted = Object.keys(place_count).sort(function(a,b){return place_count[b]-place_count[a]});
+        var pureCount = columnsData.splice(1, columnsData.length);
+        var countSorted = pureCount.sort(function (a, b) {  return b - a;  });
+        */
     }
 }
 
