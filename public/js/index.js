@@ -186,14 +186,15 @@ function openPlot(plot) {
         
         var tmp = count.slice();
         tmp.sort(sortNumber);
-        
+            
 
         $('#plot-title').html('<i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;設施開工年份分佈');
+        $('.bulleted > .item').html('設施開工年份分佈/個數折線圖')
         $('.plot-content').html('<p class="sec-title">-政府到底是從哪一年開始建造這些蚊子館的呢？-</p>' +
                                                 '<div class="plot-description"><span>閒置公共設施每年隨著時間不斷的增加，</span><br>' +
                                                 '<span>那怕舉債累累，政府卻依舊好似沒有看見一般，不斷的在各地興建所謂的「蚊子館」。</span><br>' +
                                                 '<span>其中又是在哪個年份興建最多呢？</span><br>' +
-                                                '<span>其中是否有些緣由？讓我們一起來看看吧！<span></div><br><div class="plot-table" style="padding: 4rem 1rem 0 1rem;"></div>')
+                                                '<span>其中是否有些緣由？讓我們一起來看看吧！<span></div><br><div class="ui segment"><div class="plot-table" style="padding: 1rem 1rem 1rem 1rem;"></div></div>')
 
         $('.plot-table').html('<table class="ui very basic collapsing celled table" style="margin: 0 auto;width: 220px;text-align: center;">' +
         '<thead>'+

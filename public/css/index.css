@@ -127,8 +127,10 @@ i.fa , span.fa{
     max-width: 700px;
     max-height: 500px !important;
     height: 100%;
+    /*
     top: 50%;
     transform: translateY(-50%);
+    */
     margin: 0 auto;
 }
 
