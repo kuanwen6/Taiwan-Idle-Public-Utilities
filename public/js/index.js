@@ -95,6 +95,10 @@ function closeFullNav() {
     document.getElementById("mySidenav2").style.width = "0";
 }
 
+function sortNumber(a,b) {
+    return a - b;
+}
+
 function openPlot(plot) {
     openFullNav();
 
@@ -137,20 +141,61 @@ function openPlot(plot) {
         },800)
         
     } else if (plot == 'build') {
-        $('#plot-title').html('<i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;設施開工年份分佈');
-        $('.plot-content').html('<p>-政府到底是從哪一年開始建造這些蚊子館的呢？-</p>' +
-                                                '<span>閒置公共設施每年隨著時間不斷的增加，</span><br>' +
-                                                '<span>那怕舉債累累，政府卻依舊好似沒有看見一般，不斷的在各地興建所謂的「蚊子館」。</span><br>' +
-                                                '<span>其中又是在哪個年份興建最多呢？</span><br>' +
-                                                '<span>其中是否有些緣由？讓我們一起來看看吧！<span>')
-
         var count = [0,0,0,0,0,0,0]
         globalData.forEach(function(place) {
             y = place.startYear;
             index = Math.floor((y - 1950) / 10);
             count[index] = count[index] + 1
         })
-        console.log(count);
+
+        
+        var tmp = count.slice();
+        tmp.sort(sortNumber);
+        
+
+        $('#plot-title').html('<i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;設施開工年份分佈');
+        $('.plot-content').html('<p class="sec-title">-政府到底是從哪一年開始建造這些蚊子館的呢？-</p>' +
+                                                '<div class="plot-description"><span>閒置公共設施每年隨著時間不斷的增加，</span><br>' +
+                                                '<span>那怕舉債累累，政府卻依舊好似沒有看見一般，不斷的在各地興建所謂的「蚊子館」。</span><br>' +
+                                                '<span>其中又是在哪個年份興建最多呢？</span><br>' +
+                                                '<span>其中是否有些緣由？讓我們一起來看看吧！<span><div><div class="plot-table" style="padding: 4rem 1rem 0 1rem;"></div>')
+
+        $('.plot-table').html('<table class="ui very basic collapsing celled table" style="margin: 0 auto;width: 220px;text-align: center;">' +
+        '<thead>'+
+          '<tr><th>年代</th><th>數目</th>'+
+        '</tr></thead>'+
+        '<tbody class="plot-table-body">'+
+
+        '</tbody>'+
+      '</table>')
+
+      for (var i=0; i<7; i++) {
+        switch (count[i]) {
+            case tmp[6]:
+                img_url = '<img src="img/first.svg" class="ui mini rounded image">';
+                break;
+            case tmp[5]:
+                img_url = '<img src="img/second.svg" class="ui mini rounded image">';
+                break;
+            case tmp[4]:
+                img_url = '<img src="img/third.svg" class="ui mini rounded image">';
+                break;
+            default:
+                img_url = '<i class="ellipsis horizontal icon ui mini rounded" style="width: 30px;"></i>';
+        }
+
+        $('.plot-table-body').append('<tr><td>'+
+                '<h4 class="ui image header">'+
+                img_url +
+                '<div class="content">'+
+                    (1950+i*10)+' 年代'+
+                '</div>'+
+                '</div>'+
+            '</h4></td>'+
+            '<td>'+
+                count[i]+
+            '</td></tr>')
+      }
 
         var chart = c3.generate({
             bindto: '#plot-area',

@@ -13,6 +13,10 @@ i.fa , span.fa{
     font-family: Dropdown !important;
 }
 
+.ui.icon {
+    font-family: icons !important;
+}
+
 .sidenav::-webkit-scrollbar { 
     display: none; 
 }
@@ -174,10 +178,10 @@ i.fa , span.fa{
     padding: 0 1rem 0 1rem;
 }
 
-.plot-content p{
+.plot-content .sec-title{
     font-size: 1.2rem;
     font-weight: bold;
 }
-.plot-content span{
+.plot-content .plot-description{
     color: rgba(0,0,0,.7);
 }
