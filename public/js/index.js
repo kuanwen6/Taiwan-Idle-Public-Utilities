@@ -104,11 +104,14 @@ function openPlot(plot) {
 
     if (plot == 'type') {
         $('#plot-title').html('<i class="fa fa-list-ol"></i>&nbsp;&nbsp;&nbsp;&nbsp;閒置公共設施類型分佈');
+        $('.bulleted > .item').html('閒置公共設施類型分佈/個數長條圖');
         $('.plot-content').html('<p class="sec-title">-哪種類型的蚊子館分佈最多呢？文教？社福建設？-</p>' +
                                                 '<div class="plot-description"><span>閒置公共設施有各式各樣的類型，</span><br>' +
                                                 '<span>舉凡體育場館、社福機構、軍事設施甚至是廁所都可能是蚊子館，</span><br>' +
                                                 '<span>其中又是在哪個類型興建的最多呢？</span><br>' +
-                                                '<span>到底是什麼東西可以讓政府如此樂此不疲的加蓋呢？讓我們一起來看看吧！<span></div><br>')
+                                                '<span>到底是什麼東西可以讓政府如此樂此不疲的加蓋呢？讓我們一起來看看吧！<span></div><br><div class="ui segment"><div class="plot-table" style="padding: 1rem 1rem 1rem 1rem;"></div></div>');
+
+        $('.plot-table').html('<div id="plot-area2" style="margin: 0 auto;width: 220px;text-align: center;"></div>');
 
         var type_count = {};
         for (var i=0; i<keys.length; i++) {
@@ -127,8 +130,6 @@ function openPlot(plot) {
         for (var i=0; i<keys.length; i++) {
             columnsData.push(type_count[keys[i]]);
         }
-
-
 
         console.log(type_count);
 
@@ -174,6 +175,35 @@ function openPlot(plot) {
         setTimeout(function(){
             clearInterval(resizeChart);
         },800)
+
+        var columnsData2 = [];
+        for (var j=0; j<keys.length; j++) {
+            columnsData2.push([keys[j], type_count[keys[j]]]);
+        }
+
+        var chart2 = c3.generate({
+            bindto: '#plot-area2',
+            data: {
+                columns: columnsData2,
+                type : 'donut',
+                onclick: function (d, i) { console.log("onclick", d, i); },
+                onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+                onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+            },
+            donut: {
+                title: "蚊子館類型分佈"
+            }
+        });
+
+        var resizeChart2 = setInterval(function(){
+            chart2.resize();
+        },50)
+
+        setTimeout(function(){
+            clearInterval(resizeChart2);
+        },800)
+
+        $('.plot-table').append('<p style="color:red;font-weight:bold;">＊ 點擊圖標可篩選所選類別</p>');
         
     } else if (plot == 'build') {
         var count = [0,0,0,0,0,0,0]
@@ -189,7 +219,7 @@ function openPlot(plot) {
             
 
         $('#plot-title').html('<i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;設施開工年份分佈');
-        $('.bulleted > .item').html('設施開工年份分佈/個數折線圖')
+        $('.bulleted > .item').html('設施開工年份分佈/個數折線圖');
         $('.plot-content').html('<p class="sec-title">-政府到底是從哪一年開始建造這些蚊子館的呢？-</p>' +
                                                 '<div class="plot-description"><span>閒置公共設施每年隨著時間不斷的增加，</span><br>' +
                                                 '<span>那怕舉債累累，政府卻依舊好似沒有看見一般，不斷的在各地興建所謂的「蚊子館」。</span><br>' +
