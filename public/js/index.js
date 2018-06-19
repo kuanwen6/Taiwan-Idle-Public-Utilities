@@ -104,13 +104,39 @@ function openPlot(plot) {
 
     if (plot == 'type') {
         $('#plot-title').html('<i class="fa fa-list-ol"></i>&nbsp;&nbsp;&nbsp;&nbsp;閒置公共設施類型分佈');
+        $('.plot-content').html('<p class="sec-title">-哪種類型的蚊子館分佈最多呢？文教？社福建設？-</p>' +
+                                                '<div class="plot-description"><span>閒置公共設施有各式各樣的類型，</span><br>' +
+                                                '<span>舉凡體育場館、社福機構、軍事設施甚至是廁所都可能是蚊子館，</span><br>' +
+                                                '<span>其中又是在哪個類型興建的最多呢？</span><br>' +
+                                                '<span>到底是什麼東西可以讓政府如此樂此不疲的加蓋呢？讓我們一起來看看吧！<span></div><br>')
 
+        var type_count = {};
+        for (var i=0; i<keys.length; i++) {
+            type_count[keys[i]] = 0;
+        }
+
+        globalData.forEach(function(place) {
+            if (place.type in type_count) {
+                type_count[place.type] = type_count[place.type] + 1;
+            } else {
+                type_count['其他'] = type_count['其他'] + 1;
+            }
+        })
+
+        var columnsData = ['閒置公共設施類型'];
+        for (var i=0; i<keys.length; i++) {
+            columnsData.push(type_count[keys[i]]);
+        }
+
+
+
+        console.log(type_count);
 
         var chart = c3.generate({
             bindto: '#plot-area',
             data: {
                 columns: [
-                    ['data1', 30, 200, 100, 400, 150, 250],
+                    columnsData,
                 ],
                 type: 'bar'
             },
@@ -121,12 +147,21 @@ function openPlot(plot) {
                 // or
                 //width: 100 // this makes bar width 100px
             },
+            axis: {
+                x: {
+                    type: 'category',
+                    categories: keys,
+                    tick: {
+                        rotate: -30,
+                        multiline: false
+                    },
+                }
+            },
             tooltip: {
                 format: {
-                    title: function (d) { return 'Data ' + d; },
+                    title: function (d) { return keys[d]; },
                     value: function (value, ratio, id) {
-                        var format = id === 'data1' ? d3.format(',') : d3.format('$');
-                        return format(value);
+                        return value.toString() + ' 個';
                     }
                 }
             }
@@ -158,7 +193,7 @@ function openPlot(plot) {
                                                 '<div class="plot-description"><span>閒置公共設施每年隨著時間不斷的增加，</span><br>' +
                                                 '<span>那怕舉債累累，政府卻依舊好似沒有看見一般，不斷的在各地興建所謂的「蚊子館」。</span><br>' +
                                                 '<span>其中又是在哪個年份興建最多呢？</span><br>' +
-                                                '<span>其中是否有些緣由？讓我們一起來看看吧！<span><div><div class="plot-table" style="padding: 4rem 1rem 0 1rem;"></div>')
+                                                '<span>其中是否有些緣由？讓我們一起來看看吧！<span></div><br><div class="plot-table" style="padding: 4rem 1rem 0 1rem;"></div>')
 
         $('.plot-table').html('<table class="ui very basic collapsing celled table" style="margin: 0 auto;width: 220px;text-align: center;">' +
         '<thead>'+
