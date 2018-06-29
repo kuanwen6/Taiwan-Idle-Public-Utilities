@@ -1,6 +1,6 @@
 # 台灣蚊子館地圖
 ## Install
-```
+```shell=
     git clone https://github.com/winone520/Taiwan-Idle-Public-Utilities.git
 ```
 由於這個地圖是純前端的網頁，因此修改時不必安裝其他東西，直接做修改就可以！
