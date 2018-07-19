@@ -9,7 +9,8 @@
         "cost": "約三億多元",
         "type": "交通建設",
         "location": "高雄市",
-        "coordinate": [22.5085877,120.35572]
+        "coordinate": [22.5085877,120.35572],
+        "image": "img/place/1.JPG"
     },
     {
         "name": "高雄市鳳鼻頭漁港",
@@ -21,6 +22,7 @@
         "cost": "約三億多元",
         "type": "交通建設",
         "location": "高雄市",
-        "coordinate": [22.5085877,120.35572]
+        "coordinate": [22.5085877,120.35572],
+        "image": "img/place/1.JPG"
     }
 ]
