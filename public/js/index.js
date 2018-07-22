@@ -717,3 +717,7 @@ $(document).ready(function() {
         } 
     })
 })
+
+$(window).on('load', function(e){
+    $(".preload").fadeOut();
+});
