@@ -1,9 +1,9 @@
 var citys = [
-    ['臺北市','新北市','基隆市','桃園市','新竹市','新竹縣','宜蘭縣','苗栗縣','臺中市','彰化縣','南投縣','雲林縣','花蓮縣','臺東縣','嘉義市','嘉義縣','臺南市','高雄市','屏東縣','澎湖縣','金門縣','連江縣'],
-    ['臺北市','新北市','基隆市','桃園市','新竹市','新竹縣','宜蘭縣'],
-    ['苗栗縣','臺中市','彰化縣','南投縣','雲林縣'],
-    ['花蓮縣','臺東縣'],
-    ['嘉義市','嘉義縣','臺南市','高雄市','屏東縣','澎湖縣'],
+    ['台北市','新北市','基隆市','桃園市','新竹市','新竹縣','宜蘭縣','苗栗縣','台中市','彰化縣','南投縣','雲林縣','花蓮縣','台東縣','嘉義市','嘉義縣','台南市','高雄市','屏東縣','澎湖縣','金門縣','連江縣'],
+    ['台北市','新北市','基隆市','桃園市','新竹市','新竹縣','宜蘭縣'],
+    ['苗栗縣','台中市','彰化縣','南投縣','雲林縣'],
+    ['花蓮縣','台東縣'],
+    ['嘉義市','嘉義縣','台南市','高雄市','屏東縣','澎湖縣'],
     ['金門縣','連江縣']
 ]
 
@@ -23,6 +23,7 @@ var sightIcon = L.AwesomeMarkers.icon({ icon: 'flag', markerColor: 'darkgreen', 
 var militaryIcon = L.AwesomeMarkers.icon({ icon: 'bomb', markerColor: 'purple', prefix: 'fa' });
 var marketIcon = L.AwesomeMarkers.icon({ icon: 'shopping-cart', markerColor: 'darkred', prefix: 'fa' });
 var buyIcon  = L.AwesomeMarkers.icon({ icon: 'handshake-o', markerColor: 'darkpurple', prefix: 'fa' });
+var sport = L.AwesomeMarkers.icon({ icon: 'building', markerColor: 'orange', prefix: 'fa' });
 
 var icons = {
     '其他': {
@@ -45,7 +46,11 @@ var icons = {
         'icon': 'fa fa-suitcase',
         'marker': businessIcon
     },
-    //'體育場館': 
+    '體育場館': {
+        'color':'#f2942f',
+        'icon': 'fa fa-building',
+        'marker': sport
+    },
     '產業展售場館暨直銷中心': {
         'color':'#5b3a6a',
         'icon': 'fa fa-handshake-o',
@@ -208,9 +213,13 @@ function openPlot(plot) {
     } else if (plot == 'build') {
         var count = [0,0,0,0,0,0,0]
         globalData.forEach(function(place) {
-            y = place.startYear;
-            index = Math.floor((y - 1950) / 10);
-            count[index] = count[index] + 1
+            if (place.startYear != null) {
+                y = place.startYear;
+                index = Math.floor((y - 1950) / 10);
+                if (index < 0)
+                    index=0;
+                count[index] = count[index] + 1;
+            }
         })
 
         
@@ -274,7 +283,7 @@ function openPlot(plot) {
             axis: {
                 x: {
                     type: 'category',
-                    categories: ['1950s', '1960s', '1970s', '1980s', '1990s', '2000s', '2010s']
+                    categories: ['~1950s', '1960s', '1970s', '1980s', '1990s', '2000s', '2010s']
                 }
             },
             tooltip: {
@@ -470,7 +479,7 @@ function search() {
             dataColumn.forEach(function(col){
                 document.getElementById('info-'+col).innerHTML = place[col];
             })
-            document.getElementById('info-image').innerHTML = '<img class="ui rounded image" src="img/example.jpg" style="width:100%;object-fit: cover;margin-top: 18px; height: 30vh;">';
+            document.getElementById('info-image').innerHTML = '<img class="ui rounded image" src="'+ place["image"] +'" style="width:100%;object-fit: cover;margin-top: 18px; height: 30vh;">';
             mymap.setView(place.coordinate);
         });
     })
@@ -520,7 +529,7 @@ $(document).ready(function() {
                                 name: '全部區域',
                                 value: 0,
                             },{
-                                name: '臺北市',
+                                name: '台北市',
                                 value: 1,
                             },{
                                 name: '新北市',
@@ -555,7 +564,7 @@ $(document).ready(function() {
                                 name: '苗栗縣',
                                 value: 8,
                             },{
-                                name: '臺中市',
+                                name: '台中市',
                                 value: 9,
                             },{ 
                                 name: '彰化縣',
@@ -582,7 +591,7 @@ $(document).ready(function() {
                                 name: '花蓮縣',
                                 value: 13,
                             },{
-                                name: '臺東縣',
+                                name: '台東縣',
                                 value: 14,
                             }]
                         });
@@ -602,7 +611,7 @@ $(document).ready(function() {
                                 name: '嘉義縣',
                                 value: 16,
                             },{ 
-                                name: '臺南市',
+                                name: '台南市',
                                 value: 17,
                             },{
                                 name: '高雄市',
@@ -659,7 +668,7 @@ $(document).ready(function() {
 
     $('.tab[data-tab="info"] .sub.header').hide();
 
-    $.getJSON("data.json", function(data) {
+    $.getJSON("new_data.json", function(data) {
         globalData = data;
         data.forEach((place, index) => {
             var ic = icons[place.type];
@@ -684,7 +693,7 @@ $(document).ready(function() {
                 dataColumn.forEach(function(col){
                     document.getElementById('info-'+col).innerHTML = place[col];
                 })
-                document.getElementById('info-image').innerHTML = '<img class="ui rounded image" src="img/example.jpg" style="width:100%;object-fit: cover;margin-top: 18px; height: 30vh;">';
+                document.getElementById('info-image').innerHTML = '<img class="ui rounded image" src="'+ place["image"] +'" style="width:100%;object-fit: cover;margin-top: 18px; height: 30vh;">';
                 mymap.setView(place.coordinate);
             });
         });
