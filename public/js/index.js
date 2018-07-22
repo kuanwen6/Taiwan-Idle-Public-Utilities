@@ -678,15 +678,6 @@ $(document).ready(function() {
     $.getJSON("new_data.json", function(data) {
         globalData = data;
 
-        // preload image
-        imgs = []
-        for (i=0;i<data.length;i++) {
-            imgs.push(data[i].image);
-        }
-        var tmp = [];
-        var il   = imgs.length
-        for( ; il-- ; ) tmp.push( $( '<img />' ).attr( 'src', imgs[ il ]));
-
         data.forEach((place, index) => {
             var ic = icons[place.type];
             if (typeof ic === "undefined") {
