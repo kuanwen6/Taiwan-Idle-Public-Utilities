@@ -24,12 +24,18 @@ var militaryIcon = L.AwesomeMarkers.icon({ icon: 'bomb', markerColor: 'purple', 
 var marketIcon = L.AwesomeMarkers.icon({ icon: 'shopping-cart', markerColor: 'darkred', prefix: 'fa' });
 var buyIcon  = L.AwesomeMarkers.icon({ icon: 'handshake-o', markerColor: 'darkpurple', prefix: 'fa' });
 var sport = L.AwesomeMarkers.icon({ icon: 'building', markerColor: 'orange', prefix: 'fa' });
+var schoolIcon = L.AwesomeMarkers.icon({ icon: 'graduation-cap', markerColor: 'blue', prefix: 'fa' });
 
 var icons = {
     '其他': {
         'color':'#d63e2a',
         'icon': 'fa fa-home',
         'marker': normalIcon
+    } ,
+    '文教設施': {
+        'color':'#38a7d9',
+        'icon': 'fa fa-graduation-cap',
+        'marker': schoolIcon
     } ,
     '社福設施暨活動中心': {
         'color':'#72af26',
@@ -491,6 +497,7 @@ function search() {
 $(document).ready(function() {
     openNav();
     $('.ui.long.modal').modal('show');
+
     mymap = L.map('main').setView([23.5971,121.0126], 8);
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -651,7 +658,7 @@ $(document).ready(function() {
       });
     
     for (var i=0 ; i<keys.length ; i++) {
-      if (keys[i] == '產業展售場館暨直銷中心') {
+      if (keys[i] == '產業展售場館暨直銷中心' || keys[i] == '文教設施') {
         $('#c-'+(i)).html('<button class="circular ui icon button" style="padding: .78571429em .64341429em .78571429em;background-color:'+ icons[keys[i]]['color'] +' ;color:white">' +
         '<i class="' + icons[keys[i]]['icon'] + '"></i>' +
         '</button>');
@@ -670,6 +677,16 @@ $(document).ready(function() {
 
     $.getJSON("new_data.json", function(data) {
         globalData = data;
+
+        // preload image
+        imgs = []
+        for (i=0;i<data.length;i++) {
+            imgs.push(data[i].image);
+        }
+        var tmp = [];
+        var il   = imgs.length
+        for( ; il-- ; ) tmp.push( $( '<img />' ).attr( 'src', imgs[ il ]));
+
         data.forEach((place, index) => {
             var ic = icons[place.type];
             if (typeof ic === "undefined") {
