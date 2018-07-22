@@ -10,7 +10,7 @@
         "type": "交通建設",
         "location": "台北市",
         "coordinate": [25.169735,121.4373742],
-        "image": "img/place/1.jpg"
+        "image": "img/place/1_new.jpg"
     },
     {
         "name": "苗栗縣頭份鎮停二立體停車場",
@@ -23,7 +23,7 @@
         "type": "交通建設",
         "location": "苗栗縣",
         "coordinate": [24.6880298,120.9061269],
-        "image": "img/place/2.JPG"
+        "image": "img/place/2.jpg"
     },
     {
         "name": "台中市烏日區台鐵新烏日站三到五樓",
@@ -36,7 +36,7 @@
         "type": "交通建設",
         "location": "台中市",
         "coordinate": [24.1092402,120.6127587],
-        "image": "img/place/3.JPG"
+        "image": "img/place/3.jpg"
     },
     {
         "name": "彰化縣田尾鄉海陸豐彩繪村停車場",
@@ -148,7 +148,7 @@
         "type": "文教設施",
         "location": "基隆市",
         "coordinate": [25.140573,121.7957846],
-        "image": "img/place/12.JPG"
+        "image": "img/place/12.jpg"
     },{
         "name": "基隆市中山區太平國小",
         "address": "基隆市中山區中山一路一百八十九巷一百三十五號",
@@ -160,7 +160,7 @@
         "type": "文教設施",
         "location": "基隆市",
         "coordinate": [25.134417,121.7349089],
-        "image": "img/place/13.JPG"
+        "image": "img/place/13.jpg"
     },{
         "name": "基隆市中正國中教師宿舍",
         "address": "基隆市正義路七十四巷三十街二十號至二十七號",
@@ -244,7 +244,7 @@
         "type": "文教設施",
         "location": "南投縣",
         "coordinate": [23.7117641,120.8691493],
-        "image": "img/place/20.JPG"
+        "image": "img/place/20.jpg"
     },{
         "name": "南投縣信義鄉自強國民小學",
         "address": "南投縣信義鄉自強村陽和巷五十二號",
@@ -256,7 +256,7 @@
         "type": "文教設施",
         "location": "南投縣",
         "coordinate": [23.6693195,120.8543258],
-        "image": "img/place/21.JPG"
+        "image": "img/place/21.jpg"
     },{
         "name": "南投縣信義鄉神木國民小學",
         "address": "南投縣信義鄉神木村神木巷六十一號",
