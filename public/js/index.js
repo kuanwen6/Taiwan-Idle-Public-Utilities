@@ -494,6 +494,12 @@ function search() {
     
 }
 
+preloadImg = []
+function preload(images,index) {
+    preloadImg[index] = new Image();
+    preloadImg[index].src = images;
+}
+
 $(document).ready(function() {
     openNav();
     $('.ui.long.modal').modal('show');
@@ -677,6 +683,10 @@ $(document).ready(function() {
 
     $.getJSON("new_data.json", function(data) {
         globalData = data;
+
+        data.forEach((place,index) => {
+          preload(place.image,index);  
+        });
 
         data.forEach((place, index) => {
             var ic = icons[place.type];
